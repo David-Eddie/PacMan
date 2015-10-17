@@ -3,7 +3,7 @@
   <spriteName>spr_pacman</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-100</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>///Init Variables
-MOVEMENT_SPEED = 5;
+MOVEMENT_SPEED = 4;
 </string>
           </argument>
         </arguments>
@@ -50,27 +50,26 @@ MOVEMENT_SPEED = 5;
           <argument>
             <kind>1</kind>
             <string>///Movement
-if(keyboard_check(ord("A"))){
+if(keyboard_check(ord("A"))&amp;&amp; !place_meeting(x-MOVEMENT_SPEED,y,obj_wall)){
     direction = 180;
     speed = MOVEMENT_SPEED;
     image_angle = 180;
     }
-else if(keyboard_check(ord("D"))){
+else if(keyboard_check(ord("D"))&amp;&amp; !place_meeting(x+MOVEMENT_SPEED,y,obj_wall)){
     direction = 0;
     speed = MOVEMENT_SPEED;
     image_angle = 0;
     }
-else if(keyboard_check(ord("W"))){
+else if(keyboard_check(ord("W"))&amp;&amp; !place_meeting(x,y-MOVEMENT_SPEED,obj_wall)){
     direction = 90;
     speed = MOVEMENT_SPEED;
     image_angle = 90;
     }
-else if(keyboard_check(ord("S"))){
+else if(keyboard_check(ord("S"))&amp;&amp; !place_meeting(x,y+MOVEMENT_SPEED,obj_wall)){
     direction = 270;
     speed = MOVEMENT_SPEED;
     image_angle = 270;
-    }        
-else speed = 0;
+    }
 </string>
           </argument>
         </arguments>
@@ -126,6 +125,34 @@ if(place_meeting(x,y+vspeed,obj_wall)){
         y+=sign(vspeed);
     }
     vspeed = 0;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_exit">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(x&lt;room_width/2){
+    x = room_width - 64;
+}
+else if(x &gt; room_width/2){
+    x = 64;
 }
 </string>
           </argument>
@@ -217,28 +244,6 @@ with(obj_score){
 }
 instance_destroy();
 </string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>112</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_wrap</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>4</kind>
-            <string>2</string>
           </argument>
         </arguments>
       </action>

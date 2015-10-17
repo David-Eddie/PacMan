@@ -7,22 +7,29 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_pacman</sprite>
-    <sprite>sprites\spr_vwall</sprite>
-    <sprite>sprites\spr_hwall</sprite>
+    <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_dot</sprite>
     <sprite>sprites\spr_powerup</sprite>
     <sprite>sprites\spr_blinky</sprite>
     <sprite>sprites\spr_pinky</sprite>
     <sprite>sprites\spr_inky</sprite>
     <sprite>sprites\spr_clyde</sprite>
+    <sprite>sprites\sprite9</sprite>
+    <sprite>sprites\spr_path</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
   </backgrounds>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\scr_row_col.gml</script>
+    <script>scripts\scr_coordinates.gml</script>
+  </scripts>
+  <fonts name="fonts">
+    <font>fonts\fnt_score</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_pacman</object>
-    <object>objects\obj_vwall</object>
     <object>objects\obj_dot</object>
     <object>objects\obj_score</object>
     <object>objects\obj_powerup</object>
@@ -32,7 +39,9 @@
     <object>objects\obj_inky</object>
     <object>objects\obj_clyde</object>
     <object>objects\obj_wall</object>
-    <object>objects\obj_hwall</object>
+    <object>objects\obj_exit</object>
+    <object>objects\obj_path</object>
+    <object>objects\obj_engine</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room1</room>
