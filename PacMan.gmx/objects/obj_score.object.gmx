@@ -78,11 +78,17 @@ if(!instance_exists(obj_dot)){
             <string>///Display Score
 draw_set_color(c_white);
 draw_set_font(fnt_score);
+draw_set_halign(fa_left);
 draw_text(94,30,value);
+draw_text(94,94,lives);
+
+if(global.game_state == game_states.game_over){
+    draw_set_halign(fa_center);
+    draw_text(room_width/2,room_height/2,"Game Over")
+}
 
 
-
-
+/*
 var rc = scr_row_col(mouse_x, mouse_y);
 var r = ds_map_find_value(rc,"row");
 var c = ds_map_find_value(rc,"col");
@@ -93,7 +99,7 @@ var xy = scr_coordinates(r,c);
 var x_loc = ds_map_find_value(xy,"x");
 var y_loc = ds_map_find_value(xy, "y");
 draw_text(94,150,"(" + string(x_loc) + "," + string(y_loc) + ")");
-
+*/
 </string>
           </argument>
         </arguments>

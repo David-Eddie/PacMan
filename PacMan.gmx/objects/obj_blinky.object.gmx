@@ -183,6 +183,7 @@ else if(keyboard_check(vk_down)&amp;&amp; !place_meeting(x,y+MOVEMENT_SPEED,obj_
           <argument>
             <kind>1</kind>
             <string>///AI
+var target = noone;
 //Goes to PacMan
 var closest_neighbor = noone;
 var closest_distance;
@@ -205,10 +206,32 @@ neighbors = scr_get_neighbors(row, col);
 var num_neighbors = ds_list_size(neighbors);
 var neighbor;
 var distance;
+if (!instance_exists(obj_pacman)){
+    speed = 0;
+    exit;
+}
+if(state == ghost_states.housed){
+    target = instance_place(496,272,obj_path);
+}
+else if(state == ghost_states.normal){
+    target = obj_pacman;
+}
+
+else if(state == ghost_states.scared){
+    var index = floor(random(ds_list_size(global.paths)));
+    target = ds_list_find_value(global.paths, index);
+}
+
+else if(state == ghost_states.dead){
+    target = instance_place(512,560,obj_path);
+}
 if (num_neighbors&gt;0){
     for(i = 0; i &lt; num_neighbors; i++){
         neighbor = ds_list_find_value(neighbors, i);
-        distance = point_distance(obj_pacman.x, obj_pacman.y, neighbor.x, neighbor.y);
+        distance = point_distance(target.x, target.y, neighbor.x, neighbor.y);
+        if(state == ghost_states.normal &amp;&amp; neighbor.object_index == obj_door){
+            continue;
+        }
         if (neighbor != previous_square){
             if(closest_neighbor = noone){
                 closest_neighbor = neighbor;

@@ -4,11 +4,52 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Initialize Variables
+enum game_states {
+    initial,
+    play,
+    game_over
+};
+
+enum ghost_states {
+    housed,
+    normal,
+    scared,
+    dead
+};
+
+global.game_state = game_states.play;
+
+global.paths = ds_list_create();
+with(obj_path){
+    ds_list_add(global.paths,id);
+}
+event_user(0);
+</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -61,6 +102,8 @@ with(obj_path){
           </argument>
         </arguments>
       </action>
+    </event>
+    <event eventtype="7" enumb="10">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -77,8 +120,61 @@ with(obj_path){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Spawn Pacman
-instance_create(512,848,obj_pacman);
+            <string>///Initialize Game
+if(global.game_state = game_states.play){
+    if(!instance_exists(obj_pacman)){
+        instance_create(512,848,obj_pacman);
+        instance_create(512,560,obj_blinky);
+        lives = 3;
+    }
+    else {
+        with(obj_pacman){
+            x = 512;
+            y = 848;
+            lives--;
+            if(lives == 0){
+                global.game_state = game_states.game_over;
+                with(obj_pacman){
+                    instance_destroy();
+                }
+                with(obj_ghost){
+                    instance_destroy();
+                }
+            }
+        }
+        with(obj_blinky){
+            x = 512;
+            y = 560;
+            direction = 0;
+        }
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="82">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Reset Game
+if(global.game_state==game_states.game_over){
+    game_restart();
+}
 </string>
           </argument>
         </arguments>
