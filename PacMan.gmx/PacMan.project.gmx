@@ -38,6 +38,7 @@
     <sprite>sprites\spr_path</sprite>
     <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_filler</sprite>
+    <sprite>sprites\spr_eyes</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -66,6 +67,7 @@
     <object>objects\obj_exit</object>
     <object>objects\obj_path</object>
     <object>objects\obj_engine</object>
+    <object>objects\obj_door</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room1</room>
