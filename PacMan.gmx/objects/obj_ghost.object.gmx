@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-100</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,9 +25,41 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_speed = 0;
+            <string>///Initialize Instance Variables
+MOVEMENT_SPEED = 4;
+image_speed = 1/5;
 image_index = 0;
 vulnerable = false;
+flashing = false;
+sprite_left = noone;
+sprite_right = noone;
+sprite_up = noone;
+sprite_down = noone;
+current_square = noone;
+previous_square = noone;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>flashing = true;
 </string>
           </argument>
         </arguments>
@@ -51,9 +83,136 @@ vulnerable = false;
           <argument>
             <kind>1</kind>
             <string>
-image_speed = 0;
-image_index = 0;
 vulnerable = false;
+flashing = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Sprite Control
+if(!vulnerable){
+    switch(direction){
+        case 0: sprite_index = sprite_right; break;
+        case 90: sprite_index = sprite_up; break;
+        case 180: sprite_index = sprite_left; break;
+        case 270: sprite_index = sprite_down; break;
+    }
+}
+else {
+    if(!flashing){
+        sprite_index = spr_frightened;
+    }
+    else {
+        sprite_index = spr_frightened_flashing;
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Wall Collision Detection
+var previous_direction = direction;
+if(place_meeting(x+hspeed,y,obj_wall)){
+    while(!place_meeting(x+sign(hspeed),y,obj_wall)){
+        x+=sign(hspeed);
+    }
+    hspeed = 0;
+}
+if(place_meeting(x,y+vspeed,obj_wall)){
+    while(!place_meeting(x,y+sign(vspeed),obj_wall)){
+        y+=sign(vspeed);
+    }
+    vspeed = 0;
+}
+direction = previous_direction;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Track Position
+var this_square = instance_place(x,y,obj_path)
+if(this_square != current_square){
+    previous_square = current_square;
+    current_square = this_square;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_exit">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(x&lt;room_width/2){
+    x = room_width - 64;
+}
+else if(x &gt; room_width/2){
+    x = 64;
+}
 </string>
           </argument>
         </arguments>

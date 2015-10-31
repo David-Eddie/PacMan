@@ -6,16 +6,38 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
+    <sprites name="Blinky">
+      <sprite>sprites\spr_blinky_up</sprite>
+      <sprite>sprites\spr_blinky_down</sprite>
+      <sprite>sprites\spr_blinky_left</sprite>
+      <sprite>sprites\spr_blinky_right</sprite>
+    </sprites>
+    <sprites name="Pinky">
+      <sprite>sprites\spr_pinky_up</sprite>
+      <sprite>sprites\spr_pinky_down</sprite>
+      <sprite>sprites\spr_pinky_left</sprite>
+      <sprite>sprites\spr_pinky_right</sprite>
+    </sprites>
+    <sprites name="Inky">
+      <sprite>sprites\spr_inky_up</sprite>
+      <sprite>sprites\spr_inky_down</sprite>
+      <sprite>sprites\spr_inky_left</sprite>
+      <sprite>sprites\spr_inky_right</sprite>
+    </sprites>
+    <sprites name="Clyde">
+      <sprite>sprites\spr_clyde_up</sprite>
+      <sprite>sprites\spr_clyde_down</sprite>
+      <sprite>sprites\spr_clyde_left</sprite>
+      <sprite>sprites\spr_clyde_right</sprite>
+    </sprites>
     <sprite>sprites\spr_pacman</sprite>
-    <sprite>sprites\spr_wall</sprite>
+    <sprite>sprites\spr_frightened</sprite>
+    <sprite>sprites\spr_frightened_flashing</sprite>
     <sprite>sprites\spr_dot</sprite>
     <sprite>sprites\spr_powerup</sprite>
-    <sprite>sprites\spr_blinky</sprite>
-    <sprite>sprites\spr_pinky</sprite>
-    <sprite>sprites\spr_inky</sprite>
-    <sprite>sprites\spr_clyde</sprite>
-    <sprite>sprites\sprite9</sprite>
     <sprite>sprites\spr_path</sprite>
+    <sprite>sprites\spr_wall</sprite>
+    <sprite>sprites\spr_filler</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -24,6 +46,8 @@
   <scripts name="scripts">
     <script>scripts\scr_row_col.gml</script>
     <script>scripts\scr_coordinates.gml</script>
+    <script>scripts\scr_get_neighbors.gml</script>
+    <script>scripts\scr_get_path.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_score</font>
