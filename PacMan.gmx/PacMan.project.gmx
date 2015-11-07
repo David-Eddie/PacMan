@@ -4,7 +4,16 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\snd_eat_ghost</sound>
+    <sound>sound\snd_eat_bonus</sound>
+    <sound>sound\snd_pacman_death</sound>
+    <sound>sound\snd_start_music</sound>
+    <sound>sound\snd_wining_animation</sound>
+    <sound>sound\snd_dot</sound>
+    <sound>sound\snd_ghost</sound>
+    <sound>sound\snd_ding</sound>
+  </sounds>
   <sprites name="sprites">
     <sprites name="Blinky">
       <sprite>sprites\spr_blinky_up</sprite>
@@ -39,6 +48,7 @@
     <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_filler</sprite>
     <sprite>sprites\spr_eyes</sprite>
+    <sprite>sprites\spr_death</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -68,6 +78,7 @@
     <object>objects\obj_path</object>
     <object>objects\obj_engine</object>
     <object>objects\obj_door</object>
+    <object>objects\obj_pacman_death</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room1</room>
