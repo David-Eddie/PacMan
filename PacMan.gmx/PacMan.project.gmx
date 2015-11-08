@@ -78,7 +78,6 @@
     <object>objects\obj_path</object>
     <object>objects\obj_engine</object>
     <object>objects\obj_door</object>
-    <object>objects\obj_pacman_death</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room1</room>

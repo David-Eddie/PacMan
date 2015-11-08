@@ -132,6 +132,8 @@ if(global.game_state = game_states.play){
             x = 512;
             y = 848;
             lives--;
+            state = pacman_states.normal;
+            sprite_index = spr_pacman;
             if(lives == 0){
                 global.game_state = game_states.game_over;
                 with(obj_pacman){
