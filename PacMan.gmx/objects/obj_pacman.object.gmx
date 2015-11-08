@@ -27,6 +27,11 @@
             <kind>1</kind>
             <string>///Init Variables
 MOVEMENT_SPEED = 4;
+enum pacman_states{
+    normal,
+    dying
+};
+state = pacman_states.normal;
 </string>
           </argument>
         </arguments>
@@ -91,8 +96,14 @@ else if(keyboard_check(ord("S"))&amp;&amp; !place_meeting(x,y+MOVEMENT_SPEED,obj
           <argument>
             <kind>1</kind>
             <string>///Animate chomping
-if(speed &gt; 0) image_speed = 1/15;
-else image_speed = 0;
+if(state == pacman_states.normal){
+    if(speed &gt; 0) image_speed = 1/10;
+    else image_speed = 0;
+}
+else{
+    image_speed = 1/2;
+}
+
 </string>
           </argument>
         </arguments>
@@ -181,8 +192,11 @@ else if(x &gt; room_width/2){
 }
 //Pacman and ghost reset, lose a life
 else if(state == ghost_states.normal){
-    with(obj_engine){
-        event_user(0);
+    with(obj_pacman){
+        state = pacman_states.dying;
+        sprite_index = spr_death;
+        image_index = 0;
+        image_angle = 0;
     }
 }
 </string>
@@ -244,6 +258,33 @@ with(obj_score){
     value++;
 }
 instance_destroy();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="7">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(state == pacman_states.dying){
+    with(obj_engine){
+        event_user(0);
+    }
+}
 </string>
           </argument>
         </arguments>
