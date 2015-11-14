@@ -49,9 +49,11 @@
     <sprite>sprites\spr_filler</sprite>
     <sprite>sprites\spr_eyes</sprite>
     <sprite>sprites\spr_death</sprite>
+    <sprite>sprites\spr_life</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
+    <background>background\background1</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -78,6 +80,9 @@
     <object>objects\obj_path</object>
     <object>objects\obj_engine</object>
     <object>objects\obj_door</object>
+    <object>objects\obj_clyde_target</object>
+    <object>objects\obj_pinky_target</object>
+    <object>objects\obj_inky_target</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room1</room>

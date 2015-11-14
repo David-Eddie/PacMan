@@ -95,15 +95,19 @@ else if(keyboard_check(ord("S"))&amp;&amp; !place_meeting(x,y+MOVEMENT_SPEED,obj
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Animate chomping
-if(state == pacman_states.normal){
-    if(speed &gt; 0) image_speed = 1/10;
-    else image_speed = 0;
+            <string>///Wall Collision Detection
+if(place_meeting(x+hspeed,y,obj_wall)){
+    while(!place_meeting(x+sign(hspeed),y,obj_wall)){
+        x+=sign(hspeed);
+    }
+    hspeed = 0;
 }
-else{
-    image_speed = 1/2;
+if(place_meeting(x,y+vspeed,obj_wall)){
+    while(!place_meeting(x,y+sign(vspeed),obj_wall)){
+        y+=sign(vspeed);
+    }
+    vspeed = 0;
 }
-
 </string>
           </argument>
         </arguments>
@@ -124,19 +128,15 @@ else{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Wall Collision Detection
-if(place_meeting(x+hspeed,y,obj_wall)){
-    while(!place_meeting(x+sign(hspeed),y,obj_wall)){
-        x+=sign(hspeed);
-    }
-    hspeed = 0;
+            <string>///Animate chomping
+if(state == pacman_states.normal){
+    if(speed &gt; 0) image_speed = 1/2;
+    else image_speed = 0;
 }
-if(place_meeting(x,y+vspeed,obj_wall)){
-    while(!place_meeting(x,y+sign(vspeed),obj_wall)){
-        y+=sign(vspeed);
-    }
-    vspeed = 0;
+else{
+    image_speed = 1/2;
 }
+
 </string>
           </argument>
         </arguments>
@@ -189,6 +189,7 @@ else if(x &gt; room_width/2){
             <kind>1</kind>
             <string>if(state == ghost_states.scared){
     state = ghost_states.dead;
+    audio_play_sound(snd_eat_ghost, 10, false);
 }
 //Pacman and ghost reset, lose a life
 else if(state == ghost_states.normal){
@@ -197,6 +198,9 @@ else if(state == ghost_states.normal){
         sprite_index = spr_death;
         image_index = 0;
         image_angle = 0;
+        if(!audio_is_playing(snd_pacman_death)){
+            audio_play_sound(snd_pacman_death,50,false);
+        }
     }
 }
 </string>
@@ -258,6 +262,13 @@ with(obj_score){
     value++;
 }
 instance_destroy();
+if(global.playing_dot_sound == false){
+    audio_play_sound(snd_dot,0,true);
+}
+global.playing_dot_sound = true;
+with(obj_engine){
+    alarm[1] = 10;
+}
 </string>
           </argument>
         </arguments>
@@ -284,6 +295,33 @@ instance_destroy();
     with(obj_engine){
         event_user(0);
     }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="32">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>with(obj_ghost){
+    alarm[0]=room_speed*6;
+    alarm[1]=room_speed*3;
+    state = ghost_states.scared;
 }
 </string>
           </argument>

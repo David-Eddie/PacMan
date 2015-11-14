@@ -78,8 +78,8 @@ if(!instance_exists(obj_dot)){
             <string>///Display Score
 draw_set_color(c_white);
 draw_set_font(fnt_score);
-draw_set_halign(fa_left);
-draw_text(94,30,value);
+draw_set_halign(fa_right);
+draw_text(224,32,value);
 draw_text(94,94,lives);
 
 if(global.game_state == game_states.game_over){
@@ -87,7 +87,10 @@ if(global.game_state == game_states.game_over){
     draw_text(room_width/2,room_height/2,"Game Over")
 }
 
-
+for(i = 0; i &lt; lives; i++){
+    var life_x = 96+i*64;
+    draw_sprite(spr_life,0,life_x,1120);
+}
 /*
 var rc = scr_row_col(mouse_x, mouse_y);
 var r = ds_map_find_value(rc,"row");
